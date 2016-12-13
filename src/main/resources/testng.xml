@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="DragAndDropSuite" verbose="1" >
+
+    <test name="trashTest" enabled="false">
+        <parameter name="boxIndex" value="2"/>
+        <parameter name="informationMessage" value="Are you sure that you want to delete?"/>
+        <classes>
+            <class name="tests.ActionTest">
+                <methods>
+                    <include name="elementMovingToTrashShowsAMessage"/>
+                    <include name="clickingCancelDoesNotDeletesTheBox"/>
+                    <include name="clickingOkDeletesTheBox"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="sortTest" enabled="true">
+        <parameter name="boxIndex" value="2"/>
+        <parameter name="informationMessage" value="Are you sure that you want to delete?"/>
+        <classes>
+            <class name="tests.ActionTest">
+                <methods>
+                    <include name="checkSort"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
