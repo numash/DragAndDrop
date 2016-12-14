@@ -7,7 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,34 +51,57 @@ public class ActionPage {
         return null;
     }
 
-    public void sortDescending(){
+    public void sortDescending(boolean straight){
         List<WebElement> list = boxList;
+
+        //bubble sort
         for (int i = 0; i < list.size(); i++){
             for (int j = 0; j < list.size()-1; j++) {
 
                 WebElement source = list.get(j);
                 WebElement target = list.get(j + 1);
 
-                if (Integer.parseInt(source.getText()) < Integer.parseInt(target.getText())) {
-
-                    Actions action = new Actions(driver);
-                    action.clickAndHold(source).perform();
-
-                    int x = target.getLocation().getX();
-                    int y = target.getLocation().getY();
-                    int y1 = source.getLocation().getY();
-
-                    int width = source.getSize().width;
-                    int height = source.getSize().height;
-
-                    action.moveToElement(target, (width+x)/2, y-y1-height/2).perform();
-                    //action.moveToElement(target);
-                    action.release().perform();
-
-                    //action.dragAndDrop(source, target).perform();
+                if (straight) {
+                    if (Integer.parseInt(source.getText()) > Integer.parseInt(target.getText())) {
+                        performSort(source, target);
+                    }
+                } else{
+                    if (Integer.parseInt(source.getText()) < Integer.parseInt(target.getText())) {
+                        performSort(source, target);
+                    }
                 }
             }
         }
+    }
+
+    private void performSort(WebElement source, WebElement target){
+        Actions action = new Actions(driver);
+
+        int targetX = target.getLocation().getX();
+        int targetY = target.getLocation().getY();
+        int sourceY = source.getLocation().getY();
+
+        //action.dragAndDropBy(source, targetX, targetY-sourceY);
+        action.clickAndHold(source).perform();
+        action.moveByOffset(targetX, targetY-sourceY+2).perform();
+        action.release().perform();
+    }
+
+    public boolean checkSort(boolean straight){
+        int previous = Integer.parseInt(boxList.get(0).getText());
+        for (WebElement box:boxList) {
+            if(straight){
+                if (previous > Integer.parseInt(box.getText())) {
+                    return false;
+                }
+            } else{
+                if (previous < Integer.parseInt(box.getText())) {
+                    return false;
+                }
+            }
+            previous = Integer.parseInt(box.getText());
+        }
+        return true;
     }
 
     public String getMessage(){

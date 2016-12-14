@@ -78,15 +78,30 @@ public class ActionTest {
     }
 
     /**
-     * 1. Sort boxes
+     * 1. Sort boxes by descending
      * 2. Verify boxes are sorted correctly
      */
-    /*@Test
-    public void checkSort(){
-        actionPage.sortDescending();
+    @Test
+    public void checkDescendingSort(){
+        actionPage.sortDescending(false);
+        boolean a = actionPage.checkSort(false);
 
+        softAssert.assertTrue(a, "Wrong descending sort");
         softAssert.assertAll();
-    }*/
+    }
+
+    /**
+     * 1. Sort boxes by ascending
+     * 2. Verify boxes are sorted correctly
+     */
+    @Test
+    public void checkAscendingSort(){
+        actionPage.sortDescending(true);
+        boolean a = actionPage.checkSort(true);
+
+        softAssert.assertTrue(a, "Wrong ascending sort");
+        softAssert.assertAll();
+    }
 
     @AfterTest
     public void afterTest(){

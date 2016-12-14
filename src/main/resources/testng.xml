@@ -16,13 +16,14 @@
         </classes>
     </test>
 
-    <test name="sortTest" enabled="false">
+    <test name="sortTest" enabled="true">
         <parameter name="boxIndex" value="2"/>
         <parameter name="informationMessage" value="Are you sure that you want to delete?"/>
         <classes>
             <class name="tests.ActionTest">
                 <methods>
-                    <include name="checkSort"/>
+                    <include name="checkDescendingSort"/>
+                    <include name="checkAscendingSort"/>
                 </methods>
             </class>
         </classes>
