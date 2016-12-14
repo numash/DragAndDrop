@@ -53,15 +53,30 @@ public class ActionPage {
     }
 
     public void sortDescending(){
-        for (int i = 0; i < boxList.size(); i++){
-            for (int j = 0; j < boxList.size()-1; j++) {
+        List<WebElement> list = boxList;
+        for (int i = 0; i < list.size(); i++){
+            for (int j = 0; j < list.size()-1; j++) {
 
-                WebElement source = boxList.get(j);
-                WebElement target = boxList.get(j + 1);
+                WebElement source = list.get(j);
+                WebElement target = list.get(j + 1);
 
                 if (Integer.parseInt(source.getText()) < Integer.parseInt(target.getText())) {
+
                     Actions action = new Actions(driver);
-                    action.dragAndDrop(source, target).perform();
+                    action.clickAndHold(source).perform();
+
+                    int x = target.getLocation().getX();
+                    int y = target.getLocation().getY();
+                    int y1 = source.getLocation().getY();
+
+                    int width = source.getSize().width;
+                    int height = source.getSize().height;
+
+                    action.moveToElement(target, (width+x)/2, y-y1-height/2).perform();
+                    //action.moveToElement(target);
+                    action.release().perform();
+
+                    //action.dragAndDrop(source, target).perform();
                 }
             }
         }

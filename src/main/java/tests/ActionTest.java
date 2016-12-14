@@ -81,16 +81,15 @@ public class ActionTest {
      * 1. Sort boxes
      * 2. Verify boxes are sorted correctly
      */
-    @Test
+    /*@Test
     public void checkSort(){
         actionPage.sortDescending();
 
-        //softAssert.assertNull(actionPage.getBoxElement(boxIndex), "Element wasn't deleted after clicking 'Ok' on alert");
         softAssert.assertAll();
-    }
+    }*/
 
     @AfterTest
     public void afterTest(){
-     //   driver.quit();
+        driver.quit();
     }
 }

@@ -2,7 +2,7 @@
 
 <suite name="DragAndDropSuite" verbose="1" >
 
-    <test name="trashTest" enabled="false">
+    <test name="trashTest" enabled="true">
         <parameter name="boxIndex" value="2"/>
         <parameter name="informationMessage" value="Are you sure that you want to delete?"/>
         <classes>
@@ -16,7 +16,7 @@
         </classes>
     </test>
 
-    <test name="sortTest" enabled="true">
+    <test name="sortTest" enabled="false">
         <parameter name="boxIndex" value="2"/>
         <parameter name="informationMessage" value="Are you sure that you want to delete?"/>
         <classes>
