@@ -21,7 +21,7 @@ public class ActionPage {
     private WebElement trashElement;
 
     WebDriver driver;
-    private final static String URL = "file:///D:/Java_projects/DragAndDrop/drag_and_drop/index.html";
+    private final static String URL = System.getProperty("user.dir") + "\\drag_and_drop\\index.html";
 
     public ActionPage(WebDriver driver){
         this.driver = driver;
